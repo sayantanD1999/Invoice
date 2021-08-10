@@ -7,27 +7,27 @@ var id_count = 1;
 var storage = [];
 var local_storage = [];
 console.log("hi");
-localStorage.setItem("username","NULL");
-window.onload=()=>{
-  let un = localStorage.getItem("username");
-  if (un=="NULL")
-  {
-    console.log(2);
-    document.getElementsByClassName("user_name")[0].style.display = "flex";
-  }
-}
+// localStorage.setItem("username","NULL");
+// window.onload=()=>{
+//   let un = localStorage.getItem("username");
+//   if (un=="NULL")
+//   {
+//     console.log(2);
+//     document.getElementsByClassName("user_name")[0].style.display = "flex";
+//   }
+// }
 
-function set_user_name(){
+// function set_user_name(){
   
-  let un = document.getElementById("username").value.split(" ");
-  let user = " ";
-  user +=un[0].split("")[0].toUpperCase();
-  user +=un[un.length-1].split("")[0].toUpperCase();
-  document.getElementById("set_user").innerHTML = user;
-  localStorage.setItem("username",user);
-  document.getElementsByClassName("user_name")[0].style.display = "none";
-  console.log(1);
-}
+//   let un = document.getElementById("username").value.split(" ");
+//   let user = " ";
+//   user +=un[0].split("")[0].toUpperCase();
+//   user +=un[un.length-1].split("")[0].toUpperCase();
+//   document.getElementById("set_user").innerHTML = user;
+//   localStorage.setItem("username",user);
+//   document.getElementsByClassName("user_name")[0].style.display = "none";
+//   console.log(1);
+// }
 
 function light_theme() {
   document.body.style.color = "black";
@@ -388,7 +388,7 @@ function create_cards(all_data) {
 
 function reset(){
   localStorage.clear();
-  localStorage.setItem("username","NULL");
+//   localStorage.setItem("username","NULL");
   window.location.reload();
   user_counter=0;
 }
