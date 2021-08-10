@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    referrerpolicy="no-referrer" />
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <title>Invoice</title>
+  <link rel="stylesheet" href="index.css" />
+  <script src="index.js"></script>
+</head>
+
+<body>
+
+
+  <div class="user_name">
+    <div>
+      <label for="">Enter User Name</label>
+      <input type="text" id="username" placeholder="User Name" class="inp">
+      <button onclick="set_user_name()" class="btn btn-primary">Continue</button>
+    </div>
+
+  </div>
+
+
+  <div class="side_nav">
+    <div class="logo">
+      <i class="fas fa-rupee-sign"></i>
+    </div>
+    <div class="content">
+      <div class="theme">
+        <i class="fas fa-sun" id="theme_icon" onclick="change_theme(this)"></i>
+      </div>
+      <div class="user">
+        <span id="set_user">SD</span>
+      </div>
+    </div>
+  </div>
+  <nav class="top_nav">
+    <div class="top_nav_logo">
+      <i class="fas fa-rupee-sign"></i>
+    </div>
+    <div class="top_nav_theme">
+      <i class="fas fa-sun" id="theme_icon2" onclick="change_theme(this)"></i>
+    </div>
+  </nav>
+  <nav class="content_nav">
+    <div class="nav_d1">
+      <h2>Invoices</h2>
+    </div>
+    <div class="nav_d2">
+      <!-- <h5><span id="total_invoices"></span> Invoices</h5> -->
+      <button class="btn btn-warning" style="margin-top: -10px;" onclick="reset()">Reset</button>
+    </div>
+    <div class="options" class="nav_d4">
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Status
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <p class="dropdown-item">Status</p>
+          <p class="dropdown-item"><input type="radio" name="status" onclick="invoice_type(this.value)" value="All">
+            All</input></p>
+          <p class="dropdown-item"><input type="radio" name="status" onclick="invoice_type(this.value)" value="Paid">
+            Paid</input></p>
+          <p class="dropdown-item"><input type="radio" name="status" onclick="invoice_type(this.value)" value="Draft">
+            Draft</input></p>
+          <p class="dropdown-item"><input type="radio" name="status" onclick="invoice_type(this.value)" value="Pending">
+            Pending</input></p>
+        </div>
+      </div>
+    </div>
+    <div class="add_btn_div nav_d3" onclick="new_invoice()">
+      <button class="add_btn">+</button>
+      <b>Invoice</b>
+    </div>
+  </nav>
+  <div class="invoices_container">
+    <div class="invoice">
+      <div class="d1 d">
+        <p id="unique_id">#FGS</p>
+      </div>
+      <div class="d3 d">
+        <p id="due_date">19 August, 2021</p>
+      </div>
+      <div class="d2 d">
+        <p id="name">Satish</p>
+      </div>
+      <div class="d4 d">
+        <p id="amount">₹ 5678</p>
+      </div>
+      <div id="payment_status" class="Pending d6">
+        <i class="fas fa-circle"></i>Pending
+      </div>
+      <div class="d5 d">
+        <p><button class="btn btn-info" onclick="getDetails(this)">View</button></p>
+      </div>
+    </div>
+    <div class="invoice">
+      <div class="d1 d">
+        <p id="unique_id">#FGS</p>
+      </div>
+      <div class="d3 d">
+        <p id="due_date"> 2021</p>
+      </div>
+      <div class="d2 d">
+        <p id="name">Satish Kar</p>
+      </div>
+      <div class="d4 d">
+        <p id="amount">₹ 5678</p>
+      </div>
+      <div id="payment_status" class="Pending d6">
+        <i class="fas fa-circle"></i>Pending
+      </div>
+      <div class="d5 d">
+        <p><button class="btn btn-info" onclick="getDetails(this)">View</button></p>
+      </div>
+    </div>
+    <div class="invoice">
+      <div class="d1 d">
+        <p id="unique_id">#FGS</p>
+      </div>
+      <div class="d3 d">
+        <p id="due_date">19 August, 2021</p>
+      </div>
+      <div class="d2 d">
+        <p id="name">Satish Kar</p>
+      </div>
+      <div class="d4 d">
+        <p id="amount">₹ 5678</p>
+      </div>
+      <div id="payment_status" class="Pending d6">
+        <i class="fas fa-circle"></i>Pending
+      </div>
+      <div class="d5 d">
+        <p><button class="btn btn-info" onclick="getDetails(this)">View</button></p>
+      </div>
+    </div>
+    <div class="invoice">
+      <div class="d1 d">
+        <p id="unique_id">#FGS</p>
+      </div>
+      <div class="d3 d">
+        <p id="due_date">19 August, 2021</p>
+      </div>
+      <div class="d2 d">
+        <p id="name">Satish Kar</p>
+      </div>
+      <div class="d4 d">
+        <p id="amount">₹ 5678</p>
+      </div>
+      <div id="payment_status" class="Pending d6">
+        <i class="fas fa-circle"></i>Pending
+      </div>
+      <div class="d5 d">
+        <p><button class="btn btn-info" onclick="getDetails(this)">View</button></p>
+      </div>
+    </div>
+  </div>
+  <div class="new_invoice_form">
+    <span class="cross" onclick="document.querySelector('.new_invoice_form').style.width='0%';">&times</span>
+    <form>
+      <fieldset>
+        <legend id="legend">New Invoice Details</legend>
+
+        <div class="form">
+          <div id="div1">
+            <label for="">Customer Name</label>
+            <br />
+            <input type="text" class="inp" placeholder="Name" id="cust_name" required />
+          </div>
+
+          <div id="div2">
+            <label for="">Customer Email</label>
+            <br />
+            <input type="email" class="inp" name="" placeholder="Email Id" id="cust_email" required />
+          </div>
+
+          <div id="div3">
+            <label for="">Customer's Address</label>
+            <br />
+            <br />
+            <textarea name="" id="text_area" cols="50" rows="4" placeholder="Address" required></textarea>
+            <br><br>
+            <label for="status">Status</label>
+            <br>
+            <input type="radio" name="status" value="Paid" id="status" />
+            Paid
+            <input type="radio" name="status" value="Pending" id="status" />
+            Pending
+            <input type="radio" name="status" value="Draft" id="status" />
+            Draft
+          </div>
+          <div id="div4">
+            <label for="invoice_date">Invoice Date</label>
+            <br />
+            <input type="date" class="inp" name="" id="invoice_date" required />
+            <br />
+            <label for="payment_due_date">Payment Due</label>
+            <br />
+            <input type="date" class="inp" name="" id="payment_due" required />
+          </div>
+
+
+          <div class="add_items" id="div5">
+            <div id="div6">
+              <label for="">Enter Service / Item</label>
+              <br />
+              <input type="text" class="inp2" placeholder="Service / Item" id="item" required />
+            </div>
+            <div id="div7">
+              <label for="">Enter Cost (Unit)</label>
+              <br />
+              <input type="number" min="0" class="inp2" placeholder="Cost" id="item_cost" inputmode="numeric"
+                required />
+            </div>
+            <div id="div8">
+              <label for="">Enter Quantity</label>
+              <br />
+              <input type="number" min="0" class="inp2" placeholder="Quantity" id="item_quantity" inputmode="numeric"
+                required />
+            </div>
+            <div id="div9">
+              <label for="">Enter Quantity</label>
+              <br />
+              <button id="add" onclick="add_item()">Add</button>
+            </div>
+          </div>
+
+          <div id="div10" class="table_container">
+            <table class="table" id="table">
+              <thead>
+                <tr>
+                  <td>Item Name</td>
+                  <td>Quantity</td>
+                  <td>Price</td>
+                </tr>
+              </thead>
+              <tbody id="tbody"></tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="2">Total</td>
+                  <td id="total_sum"></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <br />
+          <button class="btn_submit" id="btn_submit" onclick="submit_details()">
+            Submit
+          </button>
+        </div>
+      </fieldset>
+    </form>
+
+    
+
+  </div>
+
+  <div class="details_div_container">
+    <span class="cross" onclick="document.querySelector('.details_div_container').style.height='0%';">&times</span>
+
+    <div class="details_div_box">
+
+      <div class="invoice_detail_box">
+        <div>
+          <p>Status</p>
+        </div>
+        <div>
+          <p><button class="btn btn-primary" id="set_status">Paid</button></p>
+        </div>
+        <div>
+          <p><button class="btn btn-danger" id="del_invoice" onclick="delete_invoice(this)">Delete</button></p>
+        </div>
+        <div>
+          <p><button class="btn btn-info" id="set_changeable_status" onclick="change_status(this)">Mark As
+              Paid</button></p>
+        </div>
+      </div>
+    </div>
+    <div class="details_div">
+
+      <div class="row">
+        <div class="col-md-6">
+          <div>
+            <strong>
+              <h1 id="set_UID">#SK21</h1>
+            </strong>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div>
+            <b>
+              <h3 id="set_address">Lorem ipsum dolor sit, amet consec</h3>
+            </b>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div>
+            <b>
+              <p>Invoice Date</p>
+            </b>
+            <strong>
+              <h3 id="set_invoice_date">22 August,2021</h3>
+            </strong>
+            <br>
+            <b>
+              <p>Payment Due</p>
+            </b>
+            <strong>
+              <h3 id="set_payment_date">14 September,2021</h3>
+            </strong>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div>
+            <b>
+              <p>Bill To</p>
+            </b>
+            <strong>
+              <h3 id="set_name">Satish Kar</h3>
+            </strong>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div>
+            <b>
+              <p>Sent To</p>
+            </b>
+            <strong>
+              <h5 id="set_email">sk@gmail.com</h5>
+            </strong>
+          </div>
+        </div>
+      </div>
+
+
+      <table class="detail_table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>QTY</th>
+            <th>Cost (₹)</th>
+            <th>Total (₹) </th>
+          </tr>
+        </thead>
+        <tbody id="detail_table_tbody">
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3">Grand Total</td>
+            <td id="set_total_sum">42</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

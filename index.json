@@ -1,0 +1,33 @@
+[
+    {
+        "UID": "#WER12",
+        "name": "Satish Kar",
+        "email": "abc@gmail.com",
+        "address": "34/10,ffjsz street",
+        "invoice_date": "19 August,2021",
+        "payment_due": "19 October,2021",
+        "items": {
+            "item1": {
+                "item_name": "banner",
+                "cost": "400",
+                "quatity": "45"
+            },
+            "item2": {
+                "item_name": "pamphlet",
+                "cost": "200",
+                "quatity": "15"
+            }
+        }
+    },
+    {
+        "UID": "#WER12",
+        "name": "Satish Kar",
+        "email": "abc@gmail.com",
+        "address": "34/10,ffjsz street",
+        "invoice_date": "19 August,2021",
+        "payment_due": "19 October,2021",
+        "item": "banner",
+        "cost": "400",
+        "quantity": "45"
+    }
+]
