@@ -100,7 +100,7 @@ body::before{
   margin-left: 20px;
   height: 40px;
   cursor: pointer;
-  width: 120px;
+  width: 115px;
   padding: 5px;
   background-color: rgb(179, 102, 241);
   border-radius: 50px;
@@ -211,10 +211,11 @@ body::before{
   height: 40px;
 }
 
+
 .cross {
   position: absolute;
   top: 25px;
-  right: 20px;
+  right: 15px;
   font-size: xx-large;
   cursor: pointer;
   color: rgb(152, 40, 177);
@@ -376,17 +377,19 @@ tbody tr {
 .invoice_detail_box {
   margin: auto;
   width: 80%;
-  height: 60px;
+  height: auto;
   background-color: rgba(48, 1, 110);
   border-radius: 10px;
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: row;
+  flex-wrap: wrap;
   margin-top: 20px;
   margin-bottom: 20px;
   padding-top: 20px;
 }
 
 .invoice_detail_box > div {
+  margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -563,7 +566,15 @@ tbody tr {
     align-items: center;
   }
 
+  .table {
+    width: 100%;
+  }
+
   #payment_status {
     margin-top: 0;
   }
+}
+
+#legend{
+  padding-left: 30px;
 }
