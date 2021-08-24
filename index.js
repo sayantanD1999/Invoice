@@ -74,6 +74,7 @@ function dark_theme() {
     box2[i].style.backgroundColor = "rgba(48, 1, 110)";
     box2[i].style.color = "aliceblue";
   }
+  document.getElementsByClassName("fa-rupee-sign")[1].style.color = "aliceblue";
 }
 
 function change_theme(e) {
@@ -415,4 +416,8 @@ function submit_details() {
   }
   document.getElementById("total_sum").innerHTML = " ";
   document.getElementById("div10").style.display = "none";
+}
+
+function closeTab(){
+  document.querySelector(".new_invoice_form").style.width = "0%";
 }
