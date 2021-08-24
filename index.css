@@ -237,7 +237,7 @@ body::before{
   overflow-x: hidden;
   transition: 0.5s;
 }
-.new_invoice_form > form {
+.form_details {
   position: relative;
   margin: auto;
   margin-top: 3.5%;
@@ -505,11 +505,6 @@ tbody tr {
     justify-content: center;
     align-items: center;
   }
-  .new_invoice_form > form {
-    margin-top: 3.5%;
-    width: 100%;
-  }
-
   .form {
     display: grid;
     grid-template-columns: repeat(1, auto);
@@ -535,6 +530,17 @@ tbody tr {
   }
   #set_address {
     text-align: center;
+  }
+
+  .inp{
+    width: 100%;
+  }
+  .inp2{
+    width: 100%;
+  }
+
+  #text_area{
+    width: 100%;
   }
   .content_nav {
     height: auto;
