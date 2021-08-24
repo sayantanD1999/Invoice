@@ -149,9 +149,6 @@ function invoice_type(type) {
   // document.getElementById("total_invoices").innerHTML = all_data.length;
 }
 
-function new_invoice() {
-  document.querySelector(".new_invoice_form").style.width = "100%";
-}
 
 function generate_UID(name, address, date) {
   let uid = "#";
@@ -418,6 +415,14 @@ function submit_details() {
   document.getElementById("div10").style.display = "none";
 }
 
+function new_invoice() {
+  let form = document.querySelector(".new_invoice_form form");
+  form.classList.add("form_details");
+  document.querySelector(".new_invoice_form").style.width = "100%";
+}
+
 function closeTab(){
+  let form = document.querySelector(".new_invoice_form form");
+  form.classList.remove("form_details");
   document.querySelector(".new_invoice_form").style.width = "0%";
 }
