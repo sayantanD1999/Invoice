@@ -10,28 +10,22 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+  
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+  <script src="js/jsPDF/dist/jspdf.min.js"></script>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-  <title>Invoice</title>
+    <script src="js/jquery.min.js"></script>
+  <title>Invoice Web App</title>
   <link rel="stylesheet" href="index.css" />
   <script src="index.js"></script>
 </head>
 
 <body>
-
-
-<!--   <div class="user_name">
-    <div>
-      <label for="">Enter User Name</label>
-      <input type="text" id="username" placeholder="User Name" class="inp">
-      <button onclick="set_user_name()" class="btn btn-primary">Continue</button>
-    </div>
-
-  </div>
- -->
 
   <div class="side_nav">
     <div class="logo">
@@ -59,7 +53,6 @@
       <h2>Invoices</h2>
     </div>
     <div class="nav_d2">
-      <!-- <h5><span id="total_invoices"></span> Invoices</h5> -->
       <button class="btn btn-warning" style="margin-top: -10px;" onclick="reset()">Reset</button>
     </div>
     <div class="options" class="nav_d4">
@@ -92,7 +85,7 @@
   <div class="new_invoice_form">
     <span class="cross" onclick="closeTab()">&times</span>
     <form>
-      <fieldset>
+      <fieldset style="color: aliceblue;">
         <legend id="legend">New Invoice Details</legend>
 
         <div class="form">
@@ -114,21 +107,24 @@
             <br />
             <textarea name="" id="text_area" cols="50" rows="4" placeholder="Address" required></textarea>
             <br><br>
-            <label for="status">Status</label>
-            <br>
-            <input type="radio" name="status" value="Paid" id="status" />
-            Paid
-            <input type="radio" name="status" value="Pending" id="status" />
-            Pending
-            <input type="radio" name="status" value="Draft" id="status" />
-            Draft
+            <div>
+              <label for="status">Status</label>
+              <br>
+              <input type="radio" name="status" value="Paid" id="status" />
+              Paid
+              <input type="radio" name="status" value="Pending" id="status" />
+              Pending
+              <input type="radio" name="status" value="Draft" id="status" />
+              Draft
+            </div>
+
           </div>
           <div id="div4">
             <label for="invoice_date">Invoice Date</label>
             <br />
             <input type="date" class="inp" name="" id="invoice_date" required />
             <br />
-            <label for="payment_due_date">Payment Due</label>
+            <label for="payment_due_date">Payment Date</label>
             <br />
             <input type="date" class="inp" name="" id="payment_due" required />
           </div>
@@ -153,7 +149,7 @@
                 required />
             </div>
             <div id="div9">
-              <label for="">Enter Quantity</label>
+              <label style="visibility:hidden;" for="">Enter Quantity</label>
               <br />
               <button id="add" onclick="add_item()">Add</button>
             </div>
@@ -196,13 +192,13 @@
 
       <div class="invoice_detail_box">
         <div>
-          <p>Status</p>
+          <p><button class="btn btn-primary" onclick="create_pdf(this)">Download <i class="fas fa-download"></i></button></p>          
         </div>
         <div>
           <p><button class="btn btn-primary" id="set_status">Paid</button></p>
         </div>
         <div>
-          <p><button class="btn btn-danger" id="del_invoice" onclick="delete_invoice(this)">Delete</button></p>
+          <p><button class="btn btn-danger" id="del_invoice" onclick="delete_invoice(this)">Delete <i class="far fa-trash-alt"></i></button></p>
         </div>
         <div>
           <p><button class="btn btn-info" id="set_changeable_status" onclick="change_status(this)">Mark As
@@ -263,6 +259,13 @@
             </b>
             <strong>
               <h5 id="set_email">sk@gmail.com</h5>
+            </strong>
+            <br>
+            <strong id="set_status2">
+              <b>
+                <p>Status</p>
+              </b>
+              <h5>Paid</h5>
             </strong>
           </div>
         </div>
