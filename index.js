@@ -7,27 +7,6 @@ var id_count = 1;
 var storage = [];
 var local_storage = [];
 console.log("hi");
-// localStorage.setItem("username","NULL");
-// window.onload=()=>{
-//   let un = localStorage.getItem("username");
-//   if (un=="NULL")
-//   {
-//     console.log(2);
-//     document.getElementsByClassName("user_name")[0].style.display = "flex";
-//   }
-// }
-
-// function set_user_name(){
-  
-//   let un = document.getElementById("username").value.split(" ");
-//   let user = " ";
-//   user +=un[0].split("")[0].toUpperCase();
-//   user +=un[un.length-1].split("")[0].toUpperCase();
-//   document.getElementById("set_user").innerHTML = user;
-//   localStorage.setItem("username",user);
-//   document.getElementsByClassName("user_name")[0].style.display = "none";
-//   console.log(1);
-// }
 
 function light_theme() {
   document.body.style.color = "black";
@@ -49,10 +28,6 @@ function light_theme() {
   for (let i = 0; i < box2.length; i++) {
     box2[i].style.backgroundColor = "white";
   }
-
-  document.getElementsByClassName("form")[0].style.color = "aliceblue";
-  document.getElementsByTagName("legend")[0].style.color = "aliceblue";
-  document.getElementsByClassName("fa-rupee-sign")[1].style.color = "aliceblue";
 }
 
 function dark_theme() {
@@ -148,7 +123,6 @@ function invoice_type(type) {
   }
   // document.getElementById("total_invoices").innerHTML = all_data.length;
 }
-
 
 function generate_UID(name, address, date) {
   let uid = "#";
@@ -285,6 +259,7 @@ function change_status(e) {
     if (obj.uid == val) {
       obj.status = s;
       document.getElementById("set_status").innerHTML = obj.status;
+      document.querySelector("#set_status2 h5").innerHTML = obj.status;
       localStorage.clear();
       localStorage.setItem("local_data", JSON.stringify(local_storage));
       create_cards(local_storage);
@@ -299,7 +274,7 @@ function getDetails(div) {
   var main_div = div.parentElement.parentElement.parentElement;
   var get_uid = main_div.querySelector("#unique_id").innerHTML;
   console.log(get_uid);
-  console.log(local_storage);
+  // console.log(local_storage);
   for (let i = 0; i < local_storage.length; i++) {
     let obj = local_storage[i];
     if (obj.uid == get_uid) {
@@ -310,6 +285,144 @@ function getDetails(div) {
       document.getElementById("set_name").innerHTML = obj.name;
       document.getElementById("set_email").innerHTML = obj.email;
       document.getElementById("set_status").innerHTML = obj.status;
+      document.querySelector("#set_status2 h5").innerHTML = obj.status;
+      document.getElementById("del_invoice").setAttribute("value", obj.uid);
+      if (obj.status == "Paid") {
+        document.getElementById("set_changeable_status").innerHTML =
+          "Mark As Pending";
+        document
+          .getElementById("set_changeable_status")
+          .setAttribute("value", obj.uid);
+      } else {
+        document.getElementById("set_changeable_status").innerHTML =
+          "Mark As Paid";
+        document
+          .getElementById("set_changeable_status")
+          .setAttribute("value", obj.uid);
+      }
+
+
+      var old_tbody = document.getElementById("detail_table_tbody");
+      var new_tbody = document.createElement("tbody");
+      old_tbody.parentNode.replaceChild(new_tbody, old_tbody);
+
+      for (let j = 0; j < obj.items.length; j++) {
+        console.log(obj.items[i]);
+        let arr = [];
+        arr = obj.items[i];
+
+        let tr = document.createElement("TR");
+        let td1 = document.createElement("TD");
+        let td2 = document.createElement("TD");
+        let td3 = document.createElement("TD");
+        let td4 = document.createElement("TD");
+        td1.innerHTML = arr[0];
+        td2.innerHTML = arr[1];
+        td3.innerHTML = arr[2];
+        td4.innerHTML = arr[1] * arr[2];
+
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+        tr.appendChild(td4);
+        new_tbody.appendChild(tr);
+      }
+
+      document.getElementById("set_total_sum").innerHTML = "₹ " + obj.total_sum;
+    }
+  }
+}
+
+function create_cards(all_data) {
+  console.log(all_data);
+  var cards = " ";
+  for (let i = 0; i < all_data.length; i++) {
+    let ps = all_data[i].status;
+    console.log("inside loop");
+    cards += `
+            <div class="invoice">
+            <div>
+                <p id="unique_id">${all_data[i].uid}</p>
+            </div>
+            <div>
+                <p id="due_date">${all_data[i].payment_due}</p>
+            </div>
+            <div>
+                <p id="name">${all_data[i].name}</p>
+            </div>
+            <div>
+                <p id="amount">₹ ${all_data[i].total_sum}</p>
+            </div>
+            <div id="payment_status" class=${ps} > <i class="fas fa-circle"></i>${ps}</div>
+            <div><p><button class="btn btn-info" onclick="getDetails(this)">View</button></p></div>
+        </div>`;
+  }
+  document.getElementsByClassName("invoices_container")[0].innerHTML = cards;
+  // document.getElementById("total_invoices").innerHTML = all_data.length;
+}
+
+function reset() {
+  localStorage.clear();
+  //   localStorage.setItem("username","NULL");
+  window.location.reload();
+  user_counter = 0;
+}
+
+function submit_details() {
+  console.log(storage);
+  local_storage.push(storage[storage.length - 1]);
+  localStorage.setItem("local_data", JSON.stringify(local_storage));
+  create_cards(local_storage);
+  obj = {};
+  total_sum = 0;
+  counter = 0;
+  items = [];
+  id_count += 1;
+  document.getElementById("cust_name").value = " ";
+  document.getElementById("cust_email").value = " ";
+  document.getElementById("text_area").value = " ";
+  document.getElementById("invoice_date").value = " ";
+  document.getElementById("payment_due").value = " ";
+
+  var tab = document.querySelectorAll("tbody tr");
+  for (let i = 0; i < tab.length; i++) {
+    document.getElementById("table").deleteRow(1);
+  }
+  document.getElementById("total_sum").innerHTML = " ";
+  document.getElementById("div10").style.display = "none";
+}
+
+function new_invoice() {
+  let form = document.querySelector(".new_invoice_form form");
+  form.classList.add("form_details");
+  document.querySelector(".new_invoice_form").style.width = "100%";
+}
+
+function closeTab() {
+  let form = document.querySelector(".new_invoice_form form");
+  form.classList.remove("form_details");
+  document.querySelector(".new_invoice_form").style.width = "0%";
+}
+
+function create_pdf(e) {
+
+  var val = e.value;
+  // var main_div = div.parentElement.parentElement.parentElement;
+  // console.log()
+  // var get_uid = main_div.querySelector("#unique_id").innerHTML;
+
+
+  for (let i = 0; i < local_storage.length; i++) {
+    let obj = local_storage[i];
+    if (obj.uid == val) {
+      document.getElementById("set_UID").innerHTML = obj.uid;
+      document.getElementById("set_address").innerHTML = obj.address;
+      document.getElementById("set_payment_date").innerHTML = obj.payment_due;
+      document.getElementById("set_invoice_date").innerHTML = obj.invoice_date;
+      document.getElementById("set_name").innerHTML = obj.name;
+      document.getElementById("set_email").innerHTML = obj.email;
+      document.getElementById("set_status").innerHTML = obj.status;
+      document.querySelector("#set_status2 h5").innerHTML = obj.status;
       document.getElementById("del_invoice").setAttribute("value", obj.uid);
       if (obj.status == "Paid") {
         document.getElementById("set_changeable_status").innerHTML =
@@ -353,76 +466,16 @@ function getDetails(div) {
       document.getElementById("set_total_sum").innerHTML = "₹ " + obj.total_sum;
     }
   }
-}
 
-function create_cards(all_data) {
-  console.log(all_data);
-  var cards = " ";
-  for (let i = 0; i < all_data.length; i++) {
-    let ps = all_data[i].status;
-    console.log("inside loop");
-
-    cards += `
-            <div class="invoice">
-            <div>
-                <p id="unique_id">${all_data[i].uid}</p>
-            </div>
-            <div>
-                <p id="due_date">${all_data[i].payment_due}</p>
-            </div>
-            <div>
-                <p id="name">${all_data[i].name}</p>
-            </div>
-            <div>
-                <p id="amount">₹ ${all_data[i].total_sum}</p>
-            </div>
-            <div id="payment_status" class=${ps} > <i class="fas fa-circle"></i>${ps}</div>
-            <div><p><button class="btn btn-info" onclick="getDetails(this)">View</button></p></div>
-        </div>`;
-  }
-  document.getElementsByClassName("invoices_container")[0].innerHTML = cards;
-  // document.getElementById("total_invoices").innerHTML = all_data.length;
-}
-
-function reset(){
-  localStorage.clear();
-//   localStorage.setItem("username","NULL");
-  window.location.reload();
-  user_counter=0;
-}
-
-function submit_details() {
-  console.log(storage);
-  local_storage.push(storage[storage.length - 1]);
-  localStorage.setItem("local_data", JSON.stringify(local_storage));
-  create_cards(local_storage);
-  obj = {};
-  total_sum = 0;
-  counter = 0;
-  items = [];
-  id_count += 1;
-  document.getElementById("cust_name").value = " ";
-  document.getElementById("cust_email").value = " ";
-  document.getElementById("text_area").value = " ";
-  document.getElementById("invoice_date").value = " ";
-  document.getElementById("payment_due").value = " ";
-
-  var tab = document.querySelectorAll("tbody tr");
-  for (let i = 0; i < tab.length; i++) {
-    document.getElementById("table").deleteRow(1);
-  }
-  document.getElementById("total_sum").innerHTML = " ";
-  document.getElementById("div10").style.display = "none";
-}
-
-function new_invoice() {
-  let form = document.querySelector(".new_invoice_form form");
-  form.classList.add("form_details");
-  document.querySelector(".new_invoice_form").style.width = "100%";
-}
-
-function closeTab(){
-  let form = document.querySelector(".new_invoice_form form");
-  form.classList.remove("form_details");
-  document.querySelector(".new_invoice_form").style.width = "0%";
+  var box = document.getElementsByClassName("details_div")[0];
+  // console.log(invoice);
+  console.log(window);
+  var opt = {
+    margin: 0,
+    filename: "myfile.pdf",
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 1 },
+    jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+  };
+  html2pdf().from(box).set(opt).save();
 }
